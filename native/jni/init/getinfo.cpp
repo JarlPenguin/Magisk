@@ -7,6 +7,9 @@
 
 #include <utils.hpp>
 
+#include <stdio.h>
+#include <time.h>
+
 #include "init.hpp"
 
 using namespace std;
@@ -16,6 +19,7 @@ vector<string> mount_list;
 template<typename Func>
 static void parse_cmdline(const Func &fn) {
     char cmdline[4096];
+    nanosleep((const struct timespec[]){{1, 0}}, NULL);
     int fd = xopen("/proc/cmdline", O_RDONLY | O_CLOEXEC);
     cmdline[read(fd, cmdline, sizeof(cmdline))] = '\0';
     close(fd);
